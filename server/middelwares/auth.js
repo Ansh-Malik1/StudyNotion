@@ -67,7 +67,7 @@ exports.isInstructor = async (req,res,next)=>{
     catch(err){
         return res.status(404).json({
             success:false,
-            message:'Error in isStudentAuth'
+            message:'Error in isInstructorAuth'
         })
     }
 }
@@ -85,7 +85,7 @@ exports.isAdmin = async (req,res,next)=>{
     catch(err){
         return res.status(404).json({
             success:false,
-            message:'Error in isStudentAuth'
+            message:'Error in isAdminAuth'
         })
     }
 }
