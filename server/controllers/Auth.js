@@ -143,7 +143,7 @@ exports.login = async(req,res)=>{
                 message:"Please provide email and password"
             })
         }
-        const userExist = await User.findone({email})
+        const userExist = await User.findone({email:email})
         if(!userExist){
             return res.status(400).json({
                 success:false,
