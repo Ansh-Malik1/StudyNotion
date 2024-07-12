@@ -152,14 +152,50 @@ exports.login = async(req,res)=>{
         }
         const isMatch = await bcrypt.compare(password,userExist.password)
         if(isMatch){
+            const payload = {
+                email:userExist.email,
+                id:userExist._id,
+                accountType:userExist.accountType
+            }
             const token = jwt.sign(payload,process.env.JWT_SECRET,{
                 expires:'4h'
             })
-        }
+            userExist.token = token
+            userExist.password = undefined
 
+            const options = {
+                expires: new Date(Date.now()+3*34*60+60*1000),
+                httpOnly:true
+            }
+            res.cookie("token",token,options).status(200).json({
+                success:true,
+                token,
+                userExist,
+                message:"LoggedIn"
+            })
+        }
+        else{
+            return res.status(401).json({
+                success:true,
+                message:"Password is incorrect"
+            })
+        }
     }
     catch(err){
-
+        console.log(err)
+        return res.status(200).json({
+            success:false,
+            message:"Login Failed"
+        })
     }
 }
 
+
+exports.changePassword = async (req,res)=>{
+    //get data from body
+    //get old pass, new pass, confirm pass
+    //validation
+    //update pwd in DB
+    //send mail-> Password changed
+    //return response
+}
