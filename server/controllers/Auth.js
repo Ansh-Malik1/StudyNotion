@@ -6,48 +6,48 @@ const jwt = require('jsonwebtoken')
 require("dotenv").config()
 exports.sendotp = async (req,res)=>{
     try{
-
+        const {email} = req.body
+        const checkUserPresent  =  await User.findone({email})
+        if(checkUserPresent){
+            return res.status(400).json({
+                message:"User already present",
+                success:false
+            })
+        }
+    
+        var otp = otpGenerator.generate(6,{
+            upperCaseAlphabets:false,
+            lowerCaseAlphabets:false,
+            specialChars:false,
+        });
+        console.log("OTP Generated")
+        console.log(otp)
+        const result = await OTP.findOne({otp:otp})
+        while(result){
+            otp = otpGenerator.generate(6,{
+                upperCaseAlphabets:false,
+                lowerCaseAlphabets:false,
+                specialChars:false,
+            });
+            result = await OTP.findOne({otp:otp})
+        }
+    
+        const otpPayload = {email,otp}
+    
+        const otpBody = await OTP.create(otpPayload)
+        console.log(otpBody)
+    
+        return res.status(200).json({
+            success:true,
+            message:"OTP send successfully"
+        })
     }
     catch(err){
         console.log("Error in OTP generating")
         console.log(err)
         process.exit(1)
     }
-    const {email} = req.body
-    const checkUserPresent  =  await User.findone({email})
-    if(checkUserPresent){
-        return res.status(400).json({
-            message:"User already present",
-            success:false
-        })
-    }
 
-    var otp = otpGenerator.generate(6,{
-        upperCaseAlphabets:false,
-        lowerCaseAlphabets:false,
-        specialChars:false,
-    });
-    console.log("OTP Generated")
-    console.log(otp)
-    const result = await OTP.findOne({otp:otp})
-    while(result){
-        otp = otpGenerator.generate(6,{
-            upperCaseAlphabets:false,
-            lowerCaseAlphabets:false,
-            specialChars:false,
-        });
-        result = await OTP.findOne({otp:otp})
-    }
-
-    const otpPayload = {email,otp}
-
-    const otpBody = await OTP.create(otpPayload)
-    console.log(otpBody)
-
-    return res.status(200).json({
-        success:true,
-        message:"OTP send successfully"
-    })
 }
 
 
@@ -117,7 +117,7 @@ exports.signUp = async(req,res)=>{
             password:hashedPass,
             accountType,
             additionalDetails:profileDetails._id,
-            image:`https://api.dicebar.com/5.x/initials/svg?seed={$firstname} ${lastName}`
+            image:`https://api.dicebar.com/5.x/initials/svg?seed=${firstName} ${lastName}`
     
         })
         return res.status(200).json({
@@ -198,4 +198,6 @@ exports.changePassword = async (req,res)=>{
     //update pwd in DB
     //send mail-> Password changed
     //return response
-}
+
+
+} 
