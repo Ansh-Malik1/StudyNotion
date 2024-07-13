@@ -15,6 +15,17 @@ const courseSchema = new mongoose.Schema({
     whatYouWillLearn:{
         type:String
     },
+    price:{
+        type:Number
+    },
+    thumbnail:{
+        type:String
+    },
+    studentsEnrolled:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User",
+        required:true
+    }],
     courseContent:[
         {type:mongoose.Schema.Types.ObjectId,
             ref:"Section"
@@ -27,3 +38,5 @@ const courseSchema = new mongoose.Schema({
         }
     ]
 })
+
+module.exports = mongoose.Schema("Course",courseSchema)

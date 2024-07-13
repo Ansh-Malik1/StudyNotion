@@ -1,4 +1,4 @@
-const User = require('../models/user')
+const User = require('../models/User')
 const OTP = require('../models/OTP')
 const otpGenerator = require("otp-generator")
 const Profile = require('../models/Profile')
@@ -117,7 +117,7 @@ exports.signUp = async(req,res)=>{
             password:hashedPass,
             accountType,
             additionalDetails:profileDetails._id,
-            image:`https://api.dicebar.com/5.x/initials/svg?seed={$firstname} ${lastname}`
+            image:`https://api.dicebar.com/5.x/initials/svg?seed={$firstname} ${lastName}`
     
         })
         return res.status(200).json({
