@@ -103,3 +103,22 @@ exports.deleteAccount = async(req,res)=>{s
 }
 
 // get user details
+exports.getAllUserDetails =  async(req,res)=>{
+    try{
+        const id = req.user.id
+        const userDetails = await User.findById(id).populate("additionalDetails").exec()
+
+        return res.status(200).json({
+            success:true,
+            userDetails:userDetails,
+            message:"User details fetched successfully"
+        })
+    }
+    catch(err){
+        return res.status(400).json({
+            message:"Couldn't fetch account details.",
+            success:false,
+            error:err.message
+        })
+    }
+}
