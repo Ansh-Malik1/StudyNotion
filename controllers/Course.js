@@ -1,3 +1,4 @@
+const { populate } = require("dotenv")
 const Course = require("../models/Course")
 const Tags = require("../models/Tags")
 const User = require("../models/User")
@@ -93,6 +94,43 @@ exports.getAllcourses = async(req,res)=>{
         return res.status(400).json({
             success:false,
             message:"Error in fetching all courses"
+        })
+    }
+}
+
+exports.getAllCourses = async(req,res)=>{
+    try{
+        const {courseId} = req.body
+        const courseDetails = await Course.find({_id:courseId}).populate({
+            path:"instructor",
+            populate:{
+                path:"additionalDetails"
+            }
+        }).populate("catrgory").populate("ratingAndReviews").populate({
+            path:"courseContent",
+            populate:{
+                path:"subSection"
+            }
+        }).exec()
+
+        if(!courseDetails){
+            return res.status(400).json({
+                success:false,
+                message:"Course not found"
+            })
+        }
+
+        return res.status(200).json({
+            success:true,
+            message:"Course fetched successfully",
+            data:courseDetails
+        })
+    }
+    catch(err){
+        console.log(err)
+        return res.status(400).json({
+            success:false,
+            message:"Error in fetching course details"
         })
     }
 }

@@ -12,6 +12,11 @@ const courseSchema = new mongoose.Schema({
         ref:"User",
         required:true
     },
+    category: {
+		type: mongoose.Schema.Types.ObjectId,
+		// required: true,
+		ref: "Category",
+	},
     whatYouWillLearn:{
         type:String
     },
