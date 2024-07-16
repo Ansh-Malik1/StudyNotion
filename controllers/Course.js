@@ -74,7 +74,7 @@ exports.createCourse = async (req,res)=>{
 
 
 
-exports.getAllcourses = async(req,res)=>{
+exports.getAllCourses = async(req,res)=>{
     try{
         const courses = await Course.find({},{courseName:true,
                                             price:true,
@@ -98,7 +98,7 @@ exports.getAllcourses = async(req,res)=>{
     }
 }
 
-exports.getAllCourses = async(req,res)=>{
+exports.getCourseDetails = async(req,res)=>{
     try{
         const {courseId} = req.body
         const courseDetails = await Course.find({_id:courseId}).populate({

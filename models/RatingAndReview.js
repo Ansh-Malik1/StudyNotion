@@ -22,4 +22,4 @@ const reviewAndRating = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.Schema("RatingsAndReviews",reviewAndRating)
+module.exports = mongoose.model("RatingsAndReviews",reviewAndRating)

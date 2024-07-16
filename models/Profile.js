@@ -18,4 +18,4 @@ const profileSchema  = new  mongoose.Schema({
     }
 })
 
-module.exports = mongoose.Schema("Profile",profileSchema)
+module.exports = mongoose.model("Profile",profileSchema)

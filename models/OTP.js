@@ -23,6 +23,7 @@ async function sendVerificationMail(email,otp){
     try{
         const title = "Verification mail from StudyNotion"
         const mailResponse = await mailSender(email,title,otp)
+        console.log(mailResponse)
     }
     catch(error){
         console.log("Error in sending mail")

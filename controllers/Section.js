@@ -32,31 +32,27 @@ exports.createSection = async(req,res)=>{
     }
 }
 
-exports.updateSectionn = async (req,res)=>{
-    try{
-        const {sectionName,sectionId} = req.body
-        if(!sectionName || !sectionId){
-            return res.status(400).json({
-                success:false,
-                message:"Please provide all the required fields"
-            })
-        }
-
-        const updatedSection =  await Section.findByIdAndUpdate(sectionId,{sectionName},{new:true})
-        return res.status(200).json({
-            sucess:true,
-            message:"Section updated successfully",
-            updatedSection
-        })
-    }
-    catch(err){
-        console.log(err)
-        return res.status(400).json({
-            success:false,
-            message:"Something went wrong while updating the section"
-        })
-    }
-}
+exports.updateSection = async (req, res) => {
+	try {
+		const { sectionName, sectionId } = req.body;
+		const section = await Section.findByIdAndUpdate(
+			sectionId,
+			{ sectionName },
+			{ new: true }
+		);
+		res.status(200).json({
+			success: true,
+			message: section,
+		});
+	} 
+	catch (error) {
+		console.error("Error updating section:", error);
+		res.status(500).json({
+			success: false,
+			message: "Internal server error",
+		});
+	}
+};
 
 exports.deleteSection = async (req,res)=>{
     try{

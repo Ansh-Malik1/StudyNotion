@@ -15,4 +15,4 @@ const tagSchema = new mongoose.Schema({
     }]
 })
 
-module.exports = mongoose.Schema("Tags",tagSchema)
+module.exports = mongoose.model("Tags",tagSchema)
