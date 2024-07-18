@@ -8,10 +8,8 @@ const CodeBlocks = ({
     position, heading, subHeading, ctaBtn1, ctaBtn2, codeblock, backgroudGradient, codeColor
 }) => {
   return (
-    <div className={`flex ${position} my-20 justify-center items-center gap-10 mx-16`}>
-      
-
-    <div className='w-[50%] flex flex-col gap-8'>
+    <div className={`flex ${position} flex-col lg:my-20 my-7 justify-center items-center gap-10 lg:mx-16`}>
+    <div className='lg:w-[50%] w-[90%] flex flex-col gap-8'>
         {heading}
         <div className='text-richblack-300 font-bold '>
             {subHeading}

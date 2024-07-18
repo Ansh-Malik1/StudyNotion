@@ -5,6 +5,10 @@ import HighlightText from '../components/core/homepage/HighlightText'
 import CTAButton from '../components/core/homepage/CTAButton'
 import Banner from "../assets/Images/banner.mp4"
 import CodeBlocks from '../components/core/homepage/CodeBlocks'
+import LearningLanguageSection from '../components/core/homepage/LearningLanguageSection'
+import TimelineSection from "../components/core/homepage/TimelineSection"
+import InstructorSection from '../components/core/homepage/InstructorSection'
+import Footer from '../components/core/common/Footer'
 const Home = () => {
   return (
     <div>
@@ -18,7 +22,7 @@ const Home = () => {
                 </div>
             </div>
         </Link>
-        <div className=' flex gap-2 text-4xl font-bold mt-8'>
+        <div className=' flex gap-2 text-4xl font-bold mt-8 lg:flex-row flex-col items-center text-center'>
           <p>Empower your future with</p>
           <HighlightText text={"Coding Skills"}/>
         </div>
@@ -48,7 +52,7 @@ const Home = () => {
 
         <div>
           <CodeBlocks 
-          postion={'lg:flex-row'}
+          postion={'lg:flex-row flex-col'}
           heading={
             <div className='text-4xl font-semibold'>
               Unlock your <HighlightText text={"Coding Potential"}/> with our online courses
@@ -126,19 +130,17 @@ const Home = () => {
                     </div>
 
                 </div>
-
-
             </div>
 
             <div className=' homepage_bg mx-auto w-11/12 max-w-maxContent flex flex-col items-center justify-between gap-7'>
 
-                <div className='flex flex-row gap-5 mb-10 mt-[95px]'>
-                    <div className='text-4xl font-semibold w-[45%]'>
+                <div className='flex lg:flex-row flex-col gap-5 mb-10 mt-[95px]'>
+                    <div className='text-4xl font-semibold lg:w-[45%]'>
                         Get the Skills you need for a
                         <HighlightText text={" Job that is in demand"} />
                     </div>
 
-                    <div className='flex flex-col gap-10 w-[40%] items-start'>
+                    <div className='flex flex-col gap-10 lg:w-[40%] items-start'>
                     <div className='text-[16px]'>
                     The modern StudyNotion is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.
                     </div>
@@ -148,10 +150,13 @@ const Home = () => {
                         </div>
                     </CTAButton>
                     </div>
-
                 </div>
             </div>
+            <TimelineSection/>
+            <LearningLanguageSection/>
       </div>
+      <InstructorSection/>
+      <Footer/>
     </div>
   )
 }
