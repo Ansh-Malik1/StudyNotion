@@ -9,6 +9,7 @@ import LearningLanguageSection from '../components/core/homepage/LearningLanguag
 import TimelineSection from "../components/core/homepage/TimelineSection"
 import InstructorSection from '../components/core/homepage/InstructorSection'
 import Footer from '../components/core/common/Footer'
+import ExploreMore from '../components/core/homepage/ExploreMore'
 const Home = () => {
   return (
     <div>
@@ -22,11 +23,11 @@ const Home = () => {
                 </div>
             </div>
         </Link>
-        <div className=' flex gap-2 text-4xl font-bold mt-8 lg:flex-row flex-col items-center text-center'>
+        <div className=' flex gap-2 lg:text-4xl text-3xl font-bold mt-8 lg:flex-row flex-col items-center text-center'>
           <p>Empower your future with</p>
           <HighlightText text={"Coding Skills"}/>
         </div>
-        <div className='text-richblack-200 w-[70%] text-lg text-center mt-3'>
+        <div className='text-richblack-200 lg:w-[70%] text-lg text-center mt-3'>
           <p>With our online coding courses, you can learn at your own pace, from anywhere in the world, and 
             get access to a wealth of resources, including hands-on projects, quizzes, and personalized feedback
              from instructors</p>
@@ -55,7 +56,7 @@ const Home = () => {
           postion={'lg:flex-row flex-col'}
           heading={
             <div className='text-4xl font-semibold'>
-              Unlock your <HighlightText text={"Coding Potential"}/> with our online courses
+              Unlock your <HighlightText text={" Coding Potential"}/> with our online courses
             </div>
           }
           subHeading={'Our courses are designed and taught by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you.'}
@@ -84,7 +85,7 @@ const Home = () => {
           postion={'lg:flex-row'}
           heading={
             <div className='text-4xl font-semibold'>
-              Start <HighlightText text={"coding in seconds"}/> 
+              Start <HighlightText text={" coding in seconds"}/> 
             </div>
           }
           subHeading={"Go ahead, give it a try. Our hands-on learning environment means you'll be writing real code from your very first lesson."}
@@ -107,6 +108,7 @@ const Home = () => {
           position={'lg:flex-row-reverse'}
           />
         </div>
+        <ExploreMore/>
       </div>
 
       <div className='bg-pure-greys-5 text-richblack-700'>
@@ -134,7 +136,7 @@ const Home = () => {
 
             <div className=' homepage_bg mx-auto w-11/12 max-w-maxContent flex flex-col items-center justify-between gap-7'>
 
-                <div className='flex lg:flex-row flex-col gap-5 mb-10 mt-[95px]'>
+                <div className='flex lg:flex-row flex-col gap-5 mb-10 mt-[35px]'>
                     <div className='text-4xl font-semibold lg:w-[45%]'>
                         Get the Skills you need for a
                         <HighlightText text={" Job that is in demand"} />
