@@ -10,3 +10,9 @@ html,body{
 .homepage_bg{
     background:url('./assets/Images/bghome.svg');
 }
+
+.glass{
+    background:radial-gradient(#053B48 5%,#000814 70%);
+    backdrop-filter: blur(50px);
+    box-shadow: 5px 5px 20px 2px #7EC0D9;
+}

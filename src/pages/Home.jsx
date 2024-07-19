@@ -104,7 +104,7 @@ const Home = () => {
             }
           }
           codeblock={`<!DOCTYPE html>\n<html>\n<head>\n<title>Example</title>\n<linkrel="stylesheet"href="styles.css">\n</head>\n</html>`}
-          codeColor={"text-yellow-25"}
+          codeColor={"text-richblack-25"}
           position={'lg:flex-row-reverse'}
           />
         </div>
