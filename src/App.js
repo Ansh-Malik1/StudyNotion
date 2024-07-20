@@ -10,6 +10,8 @@ import UpdatePassword from "./pages/UpdatePassword";
 import VerifyEmail from "./pages/VerifyEmail"
 import PrivateRoute from "./components/core/Auth/PrivateRoute";
 import Error from "./pages/Error"
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 function App() {
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
@@ -56,6 +58,22 @@ function App() {
             </OpenRoute>
           }
         />  
+        <Route
+          path="about"
+          element={
+            <OpenRoute>
+              <About />
+            </OpenRoute>
+          }
+        />
+        <Route
+          path="contact"
+          element={
+            <OpenRoute>
+              <Contact/>
+            </OpenRoute>
+          }
+        />
         {/* <Route 
         element={
           <PrivateRoute>
