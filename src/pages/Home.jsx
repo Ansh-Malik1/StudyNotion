@@ -8,7 +8,7 @@ import CodeBlocks from '../components/core/homepage/CodeBlocks'
 import LearningLanguageSection from '../components/core/homepage/LearningLanguageSection'
 import TimelineSection from "../components/core/homepage/TimelineSection"
 import InstructorSection from '../components/core/homepage/InstructorSection'
-import Footer from '../components/core/common/Footer'
+import Footer from '../components/common/Footer'
 import ExploreMore from '../components/core/homepage/ExploreMore'
 const Home = () => {
   return (
@@ -74,7 +74,7 @@ const Home = () => {
               active:false
             }
           }
-          codeblock={`<!DOCTYPE html>\n<html>\n<head>\n<title>Example</title>\n<linkrel="stylesheet"href="styles.css">\n</head>\n</html>`}
+          codeblock={`<!DOCTYPE html>\n<html>\n<head>\n<title>Example</title>\n<linkrel="stylesheet" href="styles.css">\n</head>\n</html>`}
           codeColor={"text-yellow-25"}
           position={'lg:flex-row'}
           />
@@ -103,7 +103,7 @@ const Home = () => {
               active:false
             }
           }
-          codeblock={`<!DOCTYPE html>\n<html>\n<head>\n<title>Example</title>\n<linkrel="stylesheet"href="styles.css">\n</head>\n</html>`}
+          codeblock={`<!DOCTYPE html>\n<html>\n<head>\n<title>Example</title>\n<linkrel="stylesheet" href="styles.css">\n</head>\n</html>`}
           codeColor={"text-richblack-25"}
           position={'lg:flex-row-reverse'}
           />

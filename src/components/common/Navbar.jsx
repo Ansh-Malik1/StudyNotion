@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link , matchPath, useLocation} from 'react-router-dom'
-import logo from "../../../assets/Logo/Logo-Full-Light.png"
-import {NavbarLinks} from "../../../data/navbar-links"
+import logo from "../../assets/Logo/Logo-Full-Light.png"
+import {NavbarLinks} from "../../data/navbar-links"
 import { useState , useEffect} from 'react'
 import { useSelector } from 'react-redux'
 import {AiOutlineShoppingCart} from "react-icons/ai"
 import {IoIosArrowDropdownCircle} from "react-icons/io"
-import { apiConnector } from '../../../services/apiconnector'
-import { categories } from '../../../services/apis'
+import { apiConnector } from '../../services/apiconnector'
+import { categories } from '../../services/apis'
 
 
 const subLinks = [
