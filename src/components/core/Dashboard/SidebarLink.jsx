@@ -1,7 +1,7 @@
 import * as Icons from "react-icons/vsc"
 import { useDispatch } from "react-redux"
 import { NavLink, matchPath, useLocation } from "react-router-dom"
-
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import { resetCourseState } from "../../../slices/courseSlice"
 
 export default function SidebarLink({ link, iconName }) {
@@ -29,9 +29,10 @@ export default function SidebarLink({ link, iconName }) {
         }`}
       ></span>
       <div className="flex items-center gap-x-2">
-        {/* Icon Goes Here */}
-        <Icon className="text-lg" />
-        <span>{link.name}</span>
+        {
+          Icon ? (<><Icon className="text-lg" /><span>{link.name}</span></>) : 
+          (<><AiOutlineShoppingCart className="text-lg" /><span>{link.name}</span></>)
+        }
       </div>
     </NavLink>
   )

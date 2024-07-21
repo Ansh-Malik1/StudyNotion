@@ -160,8 +160,8 @@ exports.login = async(req,res)=>{
                 id:userExist._id,
                 accountType:userExist.accountType
             }
-            const token = jwt.sign(payload,process.env.JWT_SECRET,{
-                expiresIn:'4h'
+            const token = jwt.sign({email:userExist.email,id:userExist._id,accountType:userExist.accountType},process.env.JWT_SECRET,{
+                expiresIn:'24h'
             })
             userExist.token = token
             userExist.password = undefined

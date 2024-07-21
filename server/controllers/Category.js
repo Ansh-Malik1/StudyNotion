@@ -68,7 +68,6 @@ exports.categoryPageDetails = async (req, res) => {
                                          .exec();
 
             //get top 10 selling courses
-            //HW - write it on your own
 
             //return response
             return res.status(200).json({
