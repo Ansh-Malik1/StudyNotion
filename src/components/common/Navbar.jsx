@@ -8,7 +8,7 @@ import {AiOutlineShoppingCart} from "react-icons/ai"
 import {IoIosArrowDropdownCircle} from "react-icons/io"
 import { apiConnector } from '../../services/apiconnector'
 import { categories } from '../../services/apis'
-
+import ProfileDropDown from "../core/Auth/ProfileDropDown"
 
 const subLinks = [
     {
@@ -147,7 +147,7 @@ const Navbar = () => {
                 )
             }
             {
-                token !== null && <div></div>
+                token !== null && <ProfileDropDown/>
             }
             </div>
         </div>

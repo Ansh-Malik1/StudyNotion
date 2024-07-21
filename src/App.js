@@ -12,6 +12,9 @@ import PrivateRoute from "./components/core/Auth/PrivateRoute";
 import Error from "./pages/Error"
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import MyProfile from "./components/core/Dashboard/MyProfile"
+import Dashboard from "./pages/Dashboard";
+import Settings from "./components/core/Dashboard/Settings";
 function App() {
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
@@ -74,8 +77,8 @@ function App() {
             </OpenRoute>
           }
         />
-        {/* <Route 
-        element={
+        <Route 
+        element={ 
           <PrivateRoute>
             <Dashboard />
           </PrivateRoute>
@@ -85,7 +88,7 @@ function App() {
           <Route path="dashboard/Settings" element={<Settings />} />
       
 
-          {
+          {/* {
             user?.accountType === ACCOUNT_TYPE.STUDENT && (
               <>
                 <Route path="dashboard/cart" element={<Cart />} />
@@ -100,8 +103,9 @@ function App() {
                 <Route path="dashboard/add-course" element={<AddCourse />} />
               </>
               )
-          }
-        </Route> */}
+          } */}
+        </Route>
+        <Route path='*' element={<Error/>}/>
       </Routes>
     </div>
 
