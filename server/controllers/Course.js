@@ -13,7 +13,9 @@ exports.createCourse = async (req,res)=>{
         const thumbnail = req.files.thumbnailImage
         const userId = req.user.id
         console.log("ID :" ,userId)
-        if(!courseName || !courseDescription || !whatYouWillLearn || !price){
+        if(!courseName || !courseDescription || !whatYouWillLearn || !price 
+           // || !tag || !thumbnail
+        ){
             return res.status(401).json({
                 success:false,
                 message:"Please fill all the fields"

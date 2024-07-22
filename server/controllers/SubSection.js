@@ -5,26 +5,30 @@ require("dotenv").config()
 exports.createSubSection = async(req,res)=>{
     try{
         const {sectionId,title,timeDuaration,description} = req.body
-        const video = req.files.videoFile
+        console.log(req.files)
+        const video = req.files.video
 
-        if(!sectionId || !title || !timeDuaration || !description){
+        if(!sectionId || !title 
+           // || !timeDuaration
+           || !description){
             return res.status(400).json({message:"Please fill all the fields" ,success:false})
         }
+        console.log(video)
         const uploadDetails = await uploadToCloudinary(video,process.env.FOLDER_NAME)
         const videoUrl = uploadDetails.secure_url
 
         const subSectionDetails = await SubSection.create({
             title:title,
             description:description,
-            timeDuration:timeDuaration,
+            // timeDuration:timeDuaration,
             videoUrl:videoUrl
         })
 
-        const updatedSection =  await Section.findeByIdAndUpdate({_id:sectionId},{
+        const updatedSection =  await Section.findByIdAndUpdate({_id:sectionId},{
             $push:{
                 subSection:subSectionDetails._id
             }
-        },{new:true})
+        },{new:true}).populate("subSection")
         
         return res.status(200).json({message:"SubSection created successfully",success:true,updatedSection})
     }
