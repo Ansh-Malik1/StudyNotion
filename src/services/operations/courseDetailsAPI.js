@@ -92,7 +92,7 @@ export const addCourseDetails = async (data, token) => {
       Authorization: `Bearer ${token}`,
     })
     console.log("CREATE COURSE API RESPONSE............", response)
-    if (!response?.data?.sucess) {
+    if (!response?.data?.success) {
       throw new Error("Could Not Add Course Details")
     }
     toast.success("Course Details Added Successfully")
@@ -137,7 +137,6 @@ export const createSection = async (data, token) => {
       Authorization: `Bearer ${token}`,
     })
     console.log("CREATE SECTION API RESPONSE............", response)
-    console.log(response?.data?.sucess)
     if (!response?.data?.sucess) {
       throw new Error("Could Not Create Section")
     }   
@@ -164,7 +163,7 @@ export const createSubSection = async (data, token) => {
       throw new Error("Could Not Add Lecture")
     }
     toast.success("Lecture Added")
-    result = response?.data?.data
+    result = response?.data?.updatedSection
   } catch (error) {
     console.log("CREATE SUB-SECTION API ERROR............", error)
     toast.error(error.message)
@@ -219,18 +218,19 @@ export const updateSubSection = async (data, token) => {
 
 // delete a section
 export const deleteSection = async (data, token) => {
-  let result = null
+  var result = null
   const toastId = toast.loading("Loading...")
   try {
     const response = await apiConnector("POST", DELETE_SECTION_API, data, {
       Authorization: `Bearer ${token}`,
     })
     console.log("DELETE SECTION API RESPONSE............", response)
-    if (!response?.data?.sucess) {
+    if (!response?.data?.success) {
       throw new Error("Could Not Delete Section")
     }
     toast.success("Course Section Deleted")
     result = response?.data?.data
+    console.log("Result",result)
   } catch (error) {
     console.log("DELETE SECTION API ERROR............", error)
     toast.error(error.message)

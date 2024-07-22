@@ -28,7 +28,7 @@ exports.createSubSection = async(req,res)=>{
             $push:{
                 subSection:subSectionDetails._id
             }
-        },{new:true}).populate("subSection")
+        },{new:true}).populate("subSection").exec()
         
         return res.status(200).json({message:"SubSection created successfully",success:true,updatedSection})
     }
@@ -43,8 +43,8 @@ exports.createSubSection = async(req,res)=>{
 
 exports.updateSubSection = async (req, res) => {
     try {
-      const { sectionId, title, description } = req.body
-      const subSection = await SubSection.findById(sectionId)
+      const { sectionId, subSectionId ,  title, description } = req.body
+      const subSection = await SubSection.findById(subSectionId)
   
       if (!subSection) {
         return res.status(404).json({
@@ -62,7 +62,7 @@ exports.updateSubSection = async (req, res) => {
       }
       if (req.files && req.files.video !== undefined) {
         const video = req.files.video
-        const uploadDetails = await uploadImageToCloudinary(
+        const uploadDetails = await uploadToCloudinary(
           video,
           process.env.FOLDER_NAME
         )
@@ -71,10 +71,12 @@ exports.updateSubSection = async (req, res) => {
       }
   
       await subSection.save()
-  
+
+      const updatedSection = await Section.findById(sectionId).populate("subSection")
       return res.json({
         success: true,
         message: "Section updated successfully",
+        data:updatedSection
       })
     } catch (error) {
       console.error(error)
@@ -103,10 +105,11 @@ exports.updateSubSection = async (req, res) => {
           .status(404)
           .json({ success: false, message: "SubSection not found" })
       }
-  
+      const updatedSection = await Section.findById(sectionId).populate("subSection")
       return res.json({
         success: true,
         message: "SubSection deleted successfully",
+        data:updatedSection,
       })
     } catch (error) {
       console.error(error)

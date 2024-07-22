@@ -33,20 +33,20 @@ export default function CourseInformationForm() {
   const [courseCategories, setCourseCategories] = useState([])
   const courseCat =["Python","WebDev","DevOps","JAVA","C++","C#"]
   useEffect(() => {
-    const getCategories = async () => {
-      setLoading(true)
-      const categories = await fetchCourseCategories()
-      if (categories.length > 0) {
-        // console.log("categories", categories)
-        setCourseCategories(categories)
-      }
-      else{
-        let cat = ["python , webdev"]
-        setCourseCategories(cat)
-      }
+    // const getCategories = async () => {
+    //   setLoading(true)
+    //   const categories = await fetchCourseCategories()
+    //   if (categories.length > 0) {
+    //     // console.log("categories", categories)
+    //     setCourseCategories(categories)
+    //   }
+    //   else{
+    //     let cat = ["python , webdev"]
+    //     setCourseCategories(cat)
+    //   }
       
-      setLoading(false)
-    }
+    //   setLoading(false)
+    // }
     // if form is in edit mode
     if (editCourse) {
       // console.log("data populated", editCourse)
@@ -59,7 +59,7 @@ export default function CourseInformationForm() {
       setValue("courseRequirements", course.instructions)
       setValue("courseImage", course.thumbnail)
     }
-    getCategories()
+    // getCategories()
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
