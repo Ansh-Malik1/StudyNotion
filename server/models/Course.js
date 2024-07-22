@@ -41,7 +41,18 @@ const courseSchema = new mongoose.Schema({
             type:mongoose.Schema.Types.ObjectId,
             ref:"RatingAndReviews"
         }
-    ]
+    ],
+    status: {
+		type: String,
+		enum: ["Draft", "Published"],
+	},
+    instructions: {
+		type: [String],
+	},
+    tag: {
+		type: [String],
+		required: true,
+	},
 })
 
 module.exports = mongoose.model("Course",courseSchema)

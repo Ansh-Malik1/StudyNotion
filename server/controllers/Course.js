@@ -9,18 +9,19 @@ require("dotenv").config()
 exports.createCourse = async (req,res)=>{
     try{
         const {courseName,courseDescription,whatYouWillLearn,price,tag} = req.body
+        console.log("CourseController",req.files)
         const thumbnail = req.files.thumbnailImage
-
-        if(!courseName || !courseDescription || !whatYouWillLearn || !price || !tag){
+        const userId = req.user.id
+        console.log("ID :" ,userId)
+        if(!courseName || !courseDescription || !whatYouWillLearn || !price){
             return res.status(401).json({
                 success:false,
                 message:"Please fill all the fields"
             })
         }
-        const userId = req.user.userId
-        const instructorDetails = await User.findById(userId)
-        console.log(instructorDetails)
         
+        const instructorDetails = await User.findById({_id:userId})
+               
         if(!instructorDetails){
             return res.status(400).json({
                 success:false,
@@ -28,15 +29,15 @@ exports.createCourse = async (req,res)=>{
             })
         }
 
-        const tagDetails = await Tags.findById(tag)
-        if(!tagDetails){
-            return res.status(400).json({
-                success:false,
-                message:'Tag details not found'
-            })
-        }
+        // const tagDetails = await Tags.findById(tag)
+        // if(!tagDetails){
+        //     return res.status(400).json({
+        //         success:false,
+        //         message:'Tag details not found'
+        //     })
+        // }
 
-        const thumbnailImage = await uploadToCloudinary(thumbnail,process.env.FOLDER_NAME)
+        const uploadedImage = await uploadToCloudinary(thumbnail,process.env.FOLDER_NAME)
 
         const newCourse = await Course.create({
             courseName,
@@ -45,7 +46,7 @@ exports.createCourse = async (req,res)=>{
             price,
             instructor:instructorDetails._id,
             tags:tag,
-            thumbnail:thumbnailImage.secure_url
+            thumbnail:uploadedImage.secure_url
         })
 
         await User.findByIdAndUpdate({_id:instructorDetails._id},{
@@ -67,7 +68,8 @@ exports.createCourse = async (req,res)=>{
         console.log(err)
         return res.status(400).json({
             success:false,
-            message:"Error in createCourse controller"
+            message:"Error in createCourse controller",
+            error:err.message
         })
     }
 }
