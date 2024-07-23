@@ -295,7 +295,7 @@ export const deleteCourse = async (data, token) => {
       Authorization: `Bearer ${token}`,
     })
     console.log("DELETE COURSE API RESPONSE............", response)
-    if (!response?.data?.sucess) {
+    if (!response?.data?.success) {
       throw new Error("Could Not Delete Course")
     }
     toast.success("Course Deleted")
@@ -324,7 +324,7 @@ export const getFullDetailsOfCourse = async (courseId, token) => {
     )
     console.log("COURSE_FULL_DETAILS_API API RESPONSE............", response)
 
-    if (!response.data.sucess) {
+    if (!response.data.success) {
       throw new Error(response.data.message)
     }
     result = response?.data?.data
