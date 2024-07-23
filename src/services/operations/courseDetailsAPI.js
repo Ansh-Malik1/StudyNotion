@@ -275,7 +275,7 @@ export const fetchInstructorCourses = async (token) => {
       }
     )
     console.log("INSTRUCTOR COURSES API RESPONSE............", response)
-    if (!response?.data?.sucess) {
+    if (!response?.data?.success) {
       throw new Error("Could Not Fetch Instructor Courses")
     }
     result = response?.data?.data
