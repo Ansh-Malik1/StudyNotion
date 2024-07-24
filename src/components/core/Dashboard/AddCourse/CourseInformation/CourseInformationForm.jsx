@@ -33,20 +33,20 @@ export default function CourseInformationForm() {
   const [courseCategories, setCourseCategories] = useState([])
   const courseCat =["Python","WebDev","DevOps","JAVA","C++","C#"]
   useEffect(() => {
-    // const getCategories = async () => {
-    //   setLoading(true)
-    //   const categories = await fetchCourseCategories()
-    //   if (categories.length > 0) {
-    //     // console.log("categories", categories)
-    //     setCourseCategories(categories)
-    //   }
-    //   else{
-    //     let cat = ["python , webdev"]
-    //     setCourseCategories(cat)
-    //   }
+    const getCategories = async () => {
+      setLoading(true)
+      const categories = await fetchCourseCategories()
+      if (categories.length > 0) {
+        // console.log("categories", categories)
+        setCourseCategories(categories)
+      }
+      else{
+        let cat = ["python , webdev"]
+        setCourseCategories(cat)
+      }
       
-    //   setLoading(false)
-    // }
+      setLoading(false)
+    }
     // if form is in edit mode
     if (editCourse) {
       // console.log("data populated", editCourse)
@@ -59,7 +59,7 @@ export default function CourseInformationForm() {
       setValue("courseRequirements", course.instructions)
       setValue("courseImage", course.thumbnail)
     }
-    // getCategories()
+    getCategories()
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -147,7 +147,7 @@ export default function CourseInformationForm() {
     formData.append("price", data.coursePrice)
     // formData.append("tag", JSON.stringify(data.courseTags))
     formData.append("whatYouWillLearn", data.courseBenefits)
-    // formData.append("category", data.courseCategory)
+    formData.append("category", data.courseCategory)
     formData.append("status", COURSE_STATUS.DRAFT)
     formData.append("instructions", JSON.stringify(data.courseRequirements))
     formData.append("thumbnailImage", data.courseImage)
@@ -226,7 +226,7 @@ export default function CourseInformationForm() {
         )}
       </div>
       {/* Course Category */}
-      {/* <div className="flex flex-col space-y-2">
+      <div className="flex flex-col space-y-2">
         <label className="text-sm text-richblack-5" htmlFor="courseCategory">
           Course Category <sup className="text-pink-200">*</sup>
         </label>
@@ -251,7 +251,7 @@ export default function CourseInformationForm() {
             Course Category is required
           </span>
         )}
-      </div> */}
+      </div>
       {/* Course Tags */}
       {/* <ChipInput
         label="Tags"

@@ -14,7 +14,7 @@ const courseSchema = new mongoose.Schema({
     },
     category: {
 		type: mongoose.Schema.Types.ObjectId,
-		// required: true,
+		required: true,
 		ref: "Category",
 	},
     whatYouWillLearn:{
@@ -54,6 +54,10 @@ const courseSchema = new mongoose.Schema({
 		type: [String],
 		required: true,
 	},
+    createdAt:{
+        type:Date,
+        default: Date.now()
+    }
 })
 
 module.exports = mongoose.model("Course",courseSchema)

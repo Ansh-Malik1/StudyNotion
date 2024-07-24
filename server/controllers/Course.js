@@ -6,17 +6,18 @@ const { uploadToCloudinary } = require("../utils/imageUploader")
 const Section = require("../models/Section")
 const SubSection = require("../models/SubSection")
 const CourseProgress = require("../models/CourseProgress")
+const Category = require("../models/Category")
 const { convertSecondsToDuration } = require("../utils/secToDuration")
 require("dotenv").config()
 
 
 exports.createCourse = async (req,res)=>{
     try{
-        const {courseName,courseDescription,whatYouWillLearn,price,tag} = req.body
+        const {courseName,courseDescription,whatYouWillLearn,price,tag,category} = req.body
         console.log("CourseController",req.files)
         const thumbnail = req.files.thumbnailImage
         const userId = req.user.id
-        console.log("ID :" ,userId)
+        console.log("ID :" ,category)
         if(!courseName || !courseDescription || !whatYouWillLearn || !price 
            // || !tag || !thumbnail
         ){
@@ -42,7 +43,13 @@ exports.createCourse = async (req,res)=>{
         //         message:'Tag details not found'
         //     })
         // }
-
+        const categoryDetails = await Category.findById(category)
+        if (!categoryDetails) {
+          return res.status(404).json({
+          success: false,
+          message: "Category Details Not Found",
+        })
+    }
         const uploadedImage = await uploadToCloudinary(thumbnail,process.env.FOLDER_NAME)
 
         const newCourse = await Course.create({
@@ -52,6 +59,7 @@ exports.createCourse = async (req,res)=>{
             price,
             instructor:instructorDetails._id,
             tags:tag,
+            category: categoryDetails._id,
             thumbnail:uploadedImage.secure_url
         })
 
@@ -61,6 +69,11 @@ exports.createCourse = async (req,res)=>{
             },
         },{new:true})
 
+        await Category.findByIdAndUpdate({_id:categoryDetails._id},{
+          $push:{
+              courses:newCourse._id
+          },
+      },{new:true})
         //Update tag schema
         
         return res.status(200).json({
