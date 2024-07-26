@@ -23,7 +23,7 @@ import AddCourse from "./components/core/Dashboard/AddCourse"
 import MyCourses from "./components/core/Dashboard/MyCourses"
 import EditCourse from "./components/core/Dashboard/EditCourse";
 import Catalog from "./pages/Catalog";
-
+import CoursDetails from "./pages/CourseDetails"
 function App() {
   const { user } = useSelector((state) => state.profile)
   return (
@@ -32,6 +32,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="catalog/:catalogName" element={<Catalog/>} />
+        <Route path="courses/:courseId" element={<CoursDetails/>}/>
         <Route
           path="signup"
           element={

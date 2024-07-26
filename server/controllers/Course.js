@@ -122,12 +122,14 @@ exports.getAllCourses = async(req,res)=>{
 exports.getCourseDetails = async(req,res)=>{
     try{
         const {courseId} = req.body
-        const courseDetails = await Course.find({_id:courseId}).populate({
+        const courseDetails = await Course.findById({_id:courseId}).populate({
             path:"instructor",
             populate:{
                 path:"additionalDetails"
             }
-        }).populate("catrgory").populate("ratingAndReviews").populate({
+        }).populate("category")
+        // .populate("ratingAndReviews")
+        .populate({
             path:"courseContent",
             populate:{
                 path:"subSection"
@@ -140,7 +142,7 @@ exports.getCourseDetails = async(req,res)=>{
                 message:"Course not found"
             })
         }
-
+        console.log(courseDetails)
         return res.status(200).json({
             success:true,
             message:"Course fetched successfully",
