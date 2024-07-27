@@ -99,6 +99,31 @@ function CourseDetails() {
     createdAt,
   } = response.data
 
+  const handleBuyCourse = () => {
+    if (token) {
+      buyCourse(token, [courseId], user, navigate, dispatch)
+      return
+    }
+    setConfirmationModal({
+      text1: "You are not logged in!",
+      text2: "Please login to Purchase Course.",
+      btn1Text: "Login",
+      btn2Text: "Cancel",
+      btn1Handler: () => navigate("/login"),
+      btn2Handler: () => setConfirmationModal(null),
+    })
+  }
+
+  if (paymentLoading) {
+    // console.log("payment loading")
+    return (
+      <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
+        <div className="spinner"></div>
+      </div>
+    )
+  }
+
+
 
   return (
     <>
@@ -149,9 +174,9 @@ function CourseDetails() {
               <p className="space-x-3 pb-4 text-3xl font-semibold text-richblack-5">
                 Rs. {price}
               </p>
-              {/* <button className="yellowButton" onClick={handleBuyCourse}>
+              <button className="yellowButton" onClick={handleBuyCourse}>
                 Buy Now
-              </button> */}
+              </button>
               <button className="blackButton">Add to Cart</button>
             </div>
           </div>
@@ -160,6 +185,7 @@ function CourseDetails() {
             <CourseDetailsCard
               course={response.data}
               setConfirmationModal={setConfirmationModal}
+              handleBuyCourse={handleBuyCourse}
               
             />
           </div>
