@@ -181,6 +181,15 @@ const enrollStudents = async (courses, userId, res) => {
 
       console.log("Enrolled student: ", enrolledStudent)
       // Send an email notification to the enrolled student
+      const studentAdded = await Course.findByIdAndUpdate(
+        courseId,
+        {
+          $push: {
+            studentsEnrolled: userId,
+          }
+        },{new:true}
+      )
+      console.log("Student added: ", studentAdded)
       const emailResponse = await mailSender(
         enrolledStudent.email,
         `Successfully Enrolled into ${enrolledCourse.courseName}`,

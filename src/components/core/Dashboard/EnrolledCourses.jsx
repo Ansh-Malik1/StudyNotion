@@ -45,8 +45,10 @@ export default function EnrolledCourses() {
             <p className="flex-1 px-2 py-3">Progress</p>
           </div>
           {/* Course Names */}
-          {enrolledCourses.map((course, i, arr) => (
-            <div
+          {enrolledCourses.map((course, i, arr) => {
+            console.log("Course:", course)
+            return(
+              <div
               className={`flex items-center border border-richblack-700 ${
                 i === arr.length - 1 ? "rounded-b-lg" : "rounded-none"
               }`}
@@ -56,7 +58,7 @@ export default function EnrolledCourses() {
                 className="flex w-[45%] cursor-pointer items-center gap-4 px-5 py-3"
                 onClick={() => {
                   navigate(
-                    `/view-course/${course?._id}/section/${course.courseContent?.[0]?._id}/sub-section/${course.courseContent?.[0]?.subSection?.[0]?._id}`
+                    `/view-course/${course?._id}/section/${course.courseContent[0]?._id}/sub-section/${course.courseContent[0]?.subSection?.[0]?._id}`
                   )
                 }}
               >
@@ -84,7 +86,8 @@ export default function EnrolledCourses() {
                 />
               </div>
             </div>
-          ))}
+            )
+          })}
         </div>
       )}
     </>

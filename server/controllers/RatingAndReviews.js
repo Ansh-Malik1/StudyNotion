@@ -9,7 +9,7 @@ exports.createRating = async(req,res)=>{
         const userId = req.user.id
         const {rating,review,courseId} = req.body
         
-        const courseDetails = await Course.findOne({_id:courseId,studentsEnrolled:{$eleMatch:{$eq:userId}}})
+        const courseDetails = await Course.findOne({_id:courseId,studentsEnrolled:{$elemMatch:{$eq:userId}}})
 
         if(!courseDetails){
             return res.status(400).json({
@@ -47,7 +47,8 @@ exports.createRating = async(req,res)=>{
         console.log(err)
         return res.status(400).json({
             success:false,
-            message:"Error in adding ratings and reviews"
+            message:"Error in adding ratings and reviews",
+            error:err
         })
     }
 }
