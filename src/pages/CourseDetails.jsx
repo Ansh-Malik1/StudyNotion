@@ -55,7 +55,7 @@ function CourseDetails() {
   // console.log("avgReviewCount: ", avgReviewCount)
 
   // // Collapse all
-  // const [collapse, setCollapse] = useState("")
+  const [collapse, setCollapse] = useState("")
   const [isActive, setIsActive] = useState(Array(0))
   const handleActive = (id) => {
     // console.log("called", id)

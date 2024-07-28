@@ -1,7 +1,6 @@
 const RnR = require("../models/RatingAndReview")
 const User = require("../models/User")
 const Course = require("../models/Course")
-const RatingAndReview = require("../models/RatingAndReview")
 const { default: mongoose } = require("mongoose")
 
 exports.createRating = async(req,res)=>{
@@ -24,7 +23,7 @@ exports.createRating = async(req,res)=>{
                 success:false,
                 message:"You have already reviewed this course"
             })
-        }
+        }   
 
         const RnRpayload = await RnR.create({
             user:userId,
@@ -32,7 +31,7 @@ exports.createRating = async(req,res)=>{
             rating:rating,
             review:review
         })
-
+        
         await Course.findByIdAndUpdate({_id:courseId},{
             $push:{ratingsAndReviews:RnRpayload._id}
         },{new:true})
@@ -56,10 +55,10 @@ exports.createRating = async(req,res)=>{
 
 exports.getAverageRating = async(req,res)=>{
     try{
-        const {courseId} = req.body
+        const {courseId} = req.body.courseId
 
-        const result = await RatingAndReview.aggregate([{
-            $match:{course: new mongoose.Types.ObjectId(courseId)}
+        const result = await RnR.aggregate([{
+            $match:{course: new mongoose.Schema.Types.ObjectId(courseId)}
         },
         {
             $group:{
@@ -67,8 +66,11 @@ exports.getAverageRating = async(req,res)=>{
                 averageRating:{$avg:"$rating"}
             }
         }
+        
     ])
+    console.log("result",result)
     if(result){
+        
         return res.status(200).json({
             success:true,
             message:"Average rating of the course",
@@ -96,13 +98,15 @@ exports.getAverageRating = async(req,res)=>{
 
 exports.getAllRatings = async(req,res)=>{
     try{
-        const allReviews = RnR.find({}).sort({rating:'desc'}).populate({
+        console.log("INN")
+        const allReviews = await RnR.find({}).sort({rating:'desc'}).populate({
             path:'user',
-            select:'firstName lastaName email image'
+            select:'firstName lastName email image'
         }).populate({
             path:'course',
             select:'courseName'
         }).exec()
+        console.log(allReviews)
 
         return res.status(200).json({
             success:true,
