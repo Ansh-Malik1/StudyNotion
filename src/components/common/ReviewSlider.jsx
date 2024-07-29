@@ -36,7 +36,7 @@ function ReviewSlider() {
 
 
   return (
-    <div className="text-white">
+    <div className="text-white hidden lg:block">
       <h1 className=" w-full mx-auto text-center text-2xl text-yellow-50 font-bold">Review from other learners</h1>
       <div className="my-[50px] h-[184px] max-w-maxContentTab lg:max-w-maxContent mx-auto">
         <Swiper
@@ -54,7 +54,7 @@ function ReviewSlider() {
           {reviews.length>0 && reviews.map((review, i) => {
             return (
               <SwiperSlide key={i}>
-                <div className="flex flex-col gap-3 bg-richblack-800 p-3 text-[14px] text-richblack-25">
+                <div className="flex flex-col w-full gap-3 bg-richblack-800 p-3 text-[14px] text-richblack-25">
                   <div className="flex items-center gap-4">
                     <img
                       src={

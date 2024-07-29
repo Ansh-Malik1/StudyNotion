@@ -54,13 +54,13 @@ const Navbar = () => {
 
   return (
     <div className='flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700'>
-        <div className='w-11/12 flex max-w-maxContent items-center justify-evenly'>
+        <div className='w-11/12 flex max-w-maxContent items-center justify-between lg:justify-evenly'>
             <Link to="/">
-                <img src={logo} alt="" width={162} height={32}/>
+                <img className='hidden lg:block' src={logo} alt="" width={162} height={32}/>
             </Link>
 
             <nav>
-                <ul className='flex text-richblack-25 gap-x-6'>
+                <ul className='flex text-richblack-25 gap-x-6 '>
                     {
                         NavbarLinks.map((link, index) => {
                             return(
@@ -68,11 +68,11 @@ const Navbar = () => {
                               {link.title === "Catalog" ? (
                   <>
                     <div
-                      className={`group relative flex cursor-pointer items-center ${
+                      className={`group relative cursor-pointer items-center ${
                         matchRoute("/catalog/:catalogName")
                           ? "text-yellow-25"
                           : "text-richblack-25"
-                      }`}
+                      } hidden lg:flex lg:gap-x-2`}
                     >
                       <p className='mr-[2px]'>{link.title}</p>
                       <BsChevronDown />
@@ -141,7 +141,7 @@ const Navbar = () => {
             {
                 token === null && (
                     <Link to="/login">
-                        <button className='border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 rounded-md'>
+                        <button className=' hidden lg:block border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 rounded-md'>
                             Log in
                         </button>
                     </Link>
@@ -150,7 +150,7 @@ const Navbar = () => {
             {
                 token === null && (
                     <Link to="/signup">
-                        <button  className='border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 rounded-md'>
+                        <button  className=' hidden lg:block border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 rounded-md'>
                             Sign Up
                         </button>
                     </Link>
