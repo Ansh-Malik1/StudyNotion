@@ -19,7 +19,7 @@ exports.resetPasswordToken = async(req,res)=>{
         resetPasswordTokenExpiry:Date.now()+5*60*1000
     },{new:true})
 
-    const url = `https://localhost:3000/update-password/${token}`
+    const url = `https://study-n.vercel.app/update-password/${token}`
 
     const title = 'Password reset link for your StudyNotion acoount'
     await mailSender(email,title,url)
